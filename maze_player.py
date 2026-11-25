@@ -15,7 +15,8 @@ All grid information in this file follows the following format:
 from parse_grids import Grid
 
     
-filename = "maze2.txt"
+filename = input("Input Maze Text File: ")
+if ( filename.find(".txt") == -1 ): filename += ".txt"
 maze = Grid(filename)
 
 while True:
