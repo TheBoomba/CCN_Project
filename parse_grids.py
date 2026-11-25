@@ -27,6 +27,27 @@ class Grid:
         self.exit_pos = None
         self.parse_grid(filename)
         
+    def return_grid(self, gridType):
+        """ Returns a string detailing every tile in the grid.
+        
+        Args: 
+            gridType (str) -- "maze" or "bomb" depending on which is desired.
+        """
+        string = ""
+        if(gridType == "maze"):
+            for i in range(len(self.maze_grid)):
+                for j in range(len(self.maze_grid[i])):
+                    string += self.maze_grid[i][j] + ' '
+                string += '\n'
+                
+        if(gridType == "bomb"):
+            for i in range(len(self.bomb_grid)):
+                for j in range(len(self.bomb_grid[i])):
+                    string += self.bomb_grid[i][j] + ' '
+                string += '\n'
+        return string
+        
+    #probably unneeded
     def __str__(self):
         string = ""
         for i in range(len(self.maze_grid)):
@@ -66,14 +87,14 @@ class Grid:
             True -- The player can travel to next_pos.
             False -- The player cannot travel to next_pos.
         """
+        # Checks grid boundaries
         if(pos[0] < 0 or 
            pos[1] < 0 or 
            pos[0] >= len(self.maze_grid) or 
            pos[1] >= len(self.maze_grid[0])): 
-            # Checks grid boundaries
             return False
+        # Checks if next_pos is a wall
         if(self.maze_grid[pos[0]][pos[1]] == 'x'): 
-            # Checks if next_pos is a wall
             return False
         return True
     
@@ -133,5 +154,3 @@ class Grid:
         
     
     
-grid = Grid("maze1.txt")
-print(grid)

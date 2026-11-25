@@ -15,11 +15,10 @@ All grid information in this file follows the following format:
 from parse_grids import Grid
 
     
-filename = "maze1.txt"
+filename = "maze2.txt"
 maze = Grid(filename)
 
 while True:
-    print(maze)
     if( maze.has_won() ):
         print("You have escaped the maze!")
         break
@@ -27,10 +26,11 @@ while True:
         print("You blew up...")
         break
     
-    print(maze)
+    print( "Maze:\n" + maze.return_grid("maze") )
+    print( "Bomb:\n" + maze.return_grid("bomb") )
     
-    move = input("Move (w/a/s/d/end: ").lower().strip()
-    if not maze.move(move):
+    move = input("Move (w/a/s/d/end): ").lower().strip()
+    if not maze.can_move(move):
         print("You can't move there.")
     
     
