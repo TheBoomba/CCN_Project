@@ -46,15 +46,6 @@ class Grid:
                     string += self.bomb_grid[i][j] + ' '
                 string += '\n'
         return string
-        
-    #probably unneeded
-    def __str__(self):
-        string = ""
-        for i in range(len(self.maze_grid)):
-            for j in range(len(self.maze_grid[i])):
-                string += self.maze_grid[i][j] + ' '
-            string += '\n'
-        return string
             
     def has_won(self):
         """ Returns true if the player reaches the exit. """
