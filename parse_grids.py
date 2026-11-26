@@ -10,7 +10,17 @@ All grid information in this file follows the following format:
     - 'x' is a blocked tile the player cannot travel to.
     - 's' is the current player location.
     - 'o' is the final location the player is trying to travel to.
-    - "b" is a bomb tile where the player loses if traversed.
+    - The first grid is the maze grid, the second is the bomb grid.
+    - Leave an empty line in between the two grids.
+    - Each column is separated by a space and each row is a newline.
+    i.e. maze1.txt
+    o . x
+    . . .
+    . x s
+
+    . . .
+    b . .
+    b b .
 """
 class Grid:
     MOVES = {
@@ -54,6 +64,10 @@ class Grid:
     def has_lost(self):
         """ Returns true if the player has stepped on a bomb. """
         return self.get_bomb_value(self.player_pos) == "b"
+    
+    def is_game_over(self):
+        """ Returns true if the game is over. """
+        return self.has_lost() or self.has_won()
     
     def get_maze_value(self, pos):
         """ Returns the tile at pos in maze_grid. """
@@ -120,6 +134,11 @@ class Grid:
             for j in range(len(self.maze_grid[0])):
                 if(self.maze_grid[i][j] == 's'): self.player_pos = (i, j)
                 if(self.maze_grid[i][j] == 'o'): self.exit_pos = (i, j)
+        
+        if(self.player_pos == None): 
+            raise ValueError(
+                "No player start found. Please add an 's' into the text file."
+                )
 
     def can_move(self, direction):
         """ Sees if the player can travel to the next tile.
